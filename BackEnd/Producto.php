@@ -7,8 +7,8 @@ class Producto{
     var $url_image;
     var $price;
     var $discount;
-    var $category;            
-      //djskajhdaskhf
+    var $category;     
+    
         public function MostrarProductos(){            
             $query = "SELECT * FROM product";
             $result = mysql_query($query) or die('Consulta fallida MostrarProductos: ' . mysql_error());
