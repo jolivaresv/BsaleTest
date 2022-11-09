@@ -11,11 +11,10 @@ header('Content-Type: text/html; charset=UTF-8');
     require_once '../BackEnd/Categoria.php';
 
     $IdCategoria=2; 
-    //$IdCategoria = $_GET['IdCategory'];
+    //$IdCategoria = $_POST['IdCategory'];
 
     $producto = new Producto();
     $Mproducto = $producto->MostrarProductos();
-    //$MCategoria = $producto->MostrarCategoria($IdCategoria);
 
     $Categoria = new Categoria();
     $VerCategoria = $Categoria->MostrarNombreCategoria();
@@ -55,7 +54,10 @@ header('Content-Type: text/html; charset=UTF-8');
                                         $nombreCategoria = $linea['name']; 
                                 ?>                          
                                
-                                <a class="list-group-item list-group-item-action list-group-item-secundary"><?php echo $nombreCategoria?></a>
+                                <a class="list-group-item list-group-item-action list-group-item-secundary text-uppercase border border-0 border-top">
+                                    <?php echo $nombreCategoria?>
+                                        
+                                </a>
   
                                 <?php } ?>
                                 <!--<form class="d-flex" role="search">
@@ -74,9 +76,9 @@ header('Content-Type: text/html; charset=UTF-8');
                 <!----Mostrar Filtro Ordenar------------------------------>
                 <?php 
                 $orden = $_POST['Ordenar'];
-                if ($orden == '') {$orden = 'ASC';
-                }
-
+                if ($orden != '') { 
+                    $Mproducto = $producto->OrdenarPorPrecio($orden);
+                }       
                 ?>
                     <div class="row g-2 mb-3">
                         <div class="col" id="Ncard" name="Ncard"> </div>   
