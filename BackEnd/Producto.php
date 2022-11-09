@@ -24,4 +24,13 @@ class Producto{
 
             return $result;
         }
+
+        public function OrdenarPorPrecio($Orden){            
+            $query = "SELECT * FROM product order by price '".$Orden."' ";
+            $result = mysql_query($query) or die('Consulta fallida OrdenarPorPrecio: ' . mysql_error());
+
+            return $result;          
+        }
+
+
 }
