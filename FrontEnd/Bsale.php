@@ -55,8 +55,7 @@ header('Content-Type: text/html; charset=UTF-8');
                                 ?>                          
                                
                                 <a class="list-group-item list-group-item-action list-group-item-secundary text-uppercase border border-0 border-top">
-                                    <?php echo $nombreCategoria?>
-                                        
+                                    <?php echo $nombreCategoria?>                                        
                                 </a>
   
                                 <?php } ?>
@@ -68,7 +67,6 @@ header('Content-Type: text/html; charset=UTF-8');
                             </div>
                         </div>
                     </nav>
-
 
                 </div>
             
@@ -100,6 +98,7 @@ header('Content-Type: text/html; charset=UTF-8');
                         ?>
                 <!----Fin while contador card--------------------------------->      
                     <div class="row row-cols-1 row-cols-md-4 g-4">  
+                        
                     <?php 
                     while($line = mysql_fetch_array($Mproducto, MYSQL_ASSOC)){
                         $nombreProduct = $line['name']; 
@@ -107,7 +106,7 @@ header('Content-Type: text/html; charset=UTF-8');
                         $precio        = $line['price'];
                         $descuento     = $line['discount'];
                     ?>                   
-                        <div class="col">
+                        <div class="col card-group mb-3" >
                             <div class="card shadow">
                                 <?php $num++; ?>      
                                 <img src="<?php echo $imagen; ?>" class="rounded mx-auto d-block" alt="..." width="150" height="150" >
@@ -125,9 +124,9 @@ header('Content-Type: text/html; charset=UTF-8');
 
                                 </div>
                             </div>
-                        </div>
+                         </div>
                     <?php } } ?>
-
+                       
                     </div>
                 </div>
             </div>
