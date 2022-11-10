@@ -11,12 +11,10 @@ error_reporting(0);
     require_once '../BackEnd/Producto.php';
     require_once '../BackEnd/Categoria.php';
 
-
     $orden = $_POST['Ordenar'];
     if ($orden != '') { 
         $ordenPrecio = 'order by price '.$orden;
-    }       
-                
+    }        
     
     $producto = new Producto();
     $Mproducto = $producto->MostrarProductos($ordenPrecio);
@@ -43,7 +41,7 @@ error_reporting(0);
             <p class="fw-bold fs-1">Nuestra Tienda <span class="badge bg-warning">OnLine</span></p>   
             <div class="row">
                 <div class="col-md-3 mb-3">
-                      <form class="col" action="Bsale.php" method="post">
+                    <form class="col" action="Bsale.php" method="post">
                     <nav class="navbar navbar-expand-lg bg-light shadow">
                         <div class="col">
                             <span class="navbar-brand p-3 "> <span class="badge bg-warning mb-3 fs-5">Categorías</span> </span>
@@ -52,35 +50,34 @@ error_reporting(0);
                             </button>
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">                                
                                 <div class="col list-group">                          
-                                <?php 
-                                $idCategoria = $_POST['idCategoria'];
-                                while($linea = mysql_fetch_array($VerCategoria, MYSQL_ASSOC)){
-                                        $id              = $linea['id']; 
-                                        $nombreCategoria = $linea['name']; 
-                                ?>                                        
-                                <div class="list-group-item list-group-item-secundary text-uppercase border border-0 border-top">
-                                   <input class="form-check-input" type="radio" name="idCategoria" value="<?php echo $id ?>" onchange="submit()" id="flexCheckDefault<?php echo $id ?>" <?php
+                                    <?php 
+                                    $idCategoria = $_POST['idCategoria'];
+                                    while($linea = mysql_fetch_array($VerCategoria, MYSQL_ASSOC)){
+                                            $id              = $linea['id']; 
+                                            $nombreCategoria = $linea['name']; 
+                                    ?>                                        
+                                    <div class="list-group-item list-group-item-secundary text-uppercase border border-0 border-top">
+                                       <input class="form-check-input" type="radio" name="idCategoria" value="<?php echo $id ?>" onchange="submit()" id="flexCheckDefault<?php echo $id ?>" <?php                                    
+                                            if($idCategoria == $id ){
+                                                echo 'checked';
+                                            }
+                                           ?>>
+                                        <label class="form-check-label" for="flexCheckDefault<?php echo $id ?>">
+                                            <?php echo $nombreCategoria ?>      
+                                        </label>                                
+                                   </div>
+                                    <?php } ?>                     
+                                  
+                                    <div class="input-group mb-3 col p-3">
+                                          <input type="search" class="form-control" placeholder="Buscar" aria-label="Buscar" aria-describedby="button-addon2">
+                                          <button class="btn btn-outline-success" type="submit" id="button-addon2">Buscar</button>
+                                    </div>
+                                </div>
 
-                                    
-                                    if($idCategoria == $id ){
-                                        echo 'checked';
-                                    }
-                                   ?>>
-                                    <label class="form-check-label" for="flexCheckDefault<?php echo $id ?>">
-                                        <?php echo $nombreCategoria ?>      
-                                    </label>                                
-                               </div>
-                                <?php } ?>
-                                
-                                
-                                <div class="p-4 row">                               
-                                    <button class="btn btn-outline-success" type="submit">Filtrar</button>
-                                </div>
-                                </div>
+
                             </div>
                         </div>
                     </nav>
-
                 </div>
             
                 <div class="col-md-9">  
