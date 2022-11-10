@@ -9,15 +9,15 @@ class Producto{
     var $discount;
     var $category;     
     
-        public function MostrarProductos(){            
-            $query = "SELECT * FROM product";
+        public function MostrarProductos($ordenPrecio){            
+            $query = "SELECT * FROM product $ordenPrecio";
             $result = mysql_query($query) or die('Consulta fallida MostrarProductos: ' . mysql_error());
 
             return $result;          
         }
 
-        public function FiltrarPorCategoria($idCategoria){            
-           $query = "SELECT * FROM product WHERE category = $idCategoria ";
+        public function FiltrarPorCategoria($idCategoria, $ordenPrecio){            
+            $query = "SELECT * FROM product WHERE category = $idCategoria $ordenPrecio ";
             $result = mysql_query($query) or die('Consulta fallida FiltrarPorCategoria: ' . mysql_error());
 
             return $result;

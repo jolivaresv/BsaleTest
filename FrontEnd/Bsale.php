@@ -11,11 +11,15 @@ error_reporting(0);
     require_once '../BackEnd/Producto.php';
     require_once '../BackEnd/Categoria.php';
 
-    $IdCategoria=2; 
-    //$IdCategoria = $_POST['IdCategory'];
 
+    $orden = $_POST['Ordenar'];
+    if ($orden != '') { 
+        $ordenPrecio = 'order by price '.$orden;
+    }       
+                
+    
     $producto = new Producto();
-    $Mproducto = $producto->MostrarProductos();
+    $Mproducto = $producto->MostrarProductos($ordenPrecio);
 
     $Categoria = new Categoria();
     $VerCategoria = $Categoria->MostrarNombreCategoria();
@@ -81,12 +85,6 @@ error_reporting(0);
             
                 <div class="col-md-9">  
                 <!----Mostrar Filtro Ordenar------------------------------>
-                <?php 
-                $orden = $_POST['Ordenar'];
-                if ($orden != '') { 
-                    echo $ordenPrecio = 'order by price'.$orden;
-                }       
-                ?>
                     <div class="row g-2 mb-3">
                         <div class="col" id="Ncard" name="Ncard"> </div>   
                         <div class="col">
@@ -110,7 +108,7 @@ error_reporting(0);
                         
                     <?php 
                         if ($idCategoria > 0) { 
-                            $Mproducto = $producto->FiltrarPorCategoria($idCategoria);
+                            $Mproducto = $producto->FiltrarPorCategoria($idCategoria, $ordenPrecio);
                         } 
 
                     while($line = mysql_fetch_array($Mproducto, MYSQL_ASSOC)){
