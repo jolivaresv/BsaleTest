@@ -17,7 +17,7 @@ error_reporting(0);
     }        
     
     $producto = new Producto();
-    $Mproducto = $producto->MostrarProductos($ordenPrecio);
+    $MostrarProducto = $producto->MostrarProductos($ordenPrecio);
 
     $Categoria = new Categoria();
     $VerCategoria = $Categoria->MostrarNombreCategoria();
@@ -59,23 +59,24 @@ error_reporting(0);
                                     ?>                                        
                                     <div class="list-group-item list-group-item-secundary text-uppercase border border-0 border-top">
                                        <input class="form-check-input" type="radio" name="idCategoria" value="<?php echo $id ?>" onchange="submit()" id="flexCheckDefault<?php echo $id ?>" <?php                                    
-                                            if($idCategoria == $id ){
-                                                echo 'checked';
-                                            }
+                                            if($idCategoria == $id ){ echo 'checked'; }
                                            ?>>
                                         <label class="form-check-label" for="flexCheckDefault<?php echo $id ?>">
                                             <?php echo $nombreCategoria ?>      
                                         </label>                                
                                    </div>
-                                    <?php } ?>                     
-                                  
-                                    <div class="input-group mb-3 col p-3">
-                                          <input type="search" class="form-control" name="Buscar" placeholder="Buscar" aria-label="Buscar" aria-describedby="button-addon2">
-                                          <button class="btn btn-outline-success" type="submit" id="button-addon2">Buscar</button>
+                                    <?php } ?> 
+                                    <div class="input-group p-3">
+                                        <input type="search" class="form-control" name="Buscar" value="<?php echo $Buscar ?>" placeholder="Buscar" aria-label="Buscar" aria-describedby="button-addon2">
+                                        <button class="btn btn-outline-success" type="submit" id="button-addon2">Buscar</button>
+                                            
+                                    </div>
+                                    <div class="text-center">
+                                        <a href="Bsale.php" type="button" class="badge text-bg-success">
+                                            Limpiar Filtros
+                                        </a>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
                     </nav>
@@ -106,14 +107,14 @@ error_reporting(0);
                         
                     <?php 
                         if ($idCategoria > 0) { 
-                            $Mproducto = $producto->FiltrarPorCategoria($idCategoria, $ordenPrecio);
+                            $MostrarProducto = $producto->FiltrarPorCategoria($idCategoria, $ordenPrecio);
                         } 
 
                         if ($Buscar != '') { 
-                            $Mproducto = $producto->BuscarPorNombre($Buscar, $ordenPrecio);
+                            $MostrarProducto = $producto->BuscarPorNombre($Buscar, $ordenPrecio);
                         } 
 
-                    while($line = mysql_fetch_array($Mproducto, MYSQL_ASSOC)){
+                    while($line = mysql_fetch_array($MostrarProducto, MYSQL_ASSOC)){
                         $nombreProduct = $line['name']; 
                         $imagen        = $line['url_image'];
                         $precio        = $line['price'];
