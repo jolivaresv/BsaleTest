@@ -23,6 +23,7 @@ error_reporting(0);
     $VerCategoria = $Categoria->MostrarNombreCategoria();
   
 
+    $Buscar = $_POST['Buscar'];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -69,7 +70,7 @@ error_reporting(0);
                                     <?php } ?>                     
                                   
                                     <div class="input-group mb-3 col p-3">
-                                          <input type="search" class="form-control" placeholder="Buscar" aria-label="Buscar" aria-describedby="button-addon2">
+                                          <input type="search" class="form-control" name="Buscar" placeholder="Buscar" aria-label="Buscar" aria-describedby="button-addon2">
                                           <button class="btn btn-outline-success" type="submit" id="button-addon2">Buscar</button>
                                     </div>
                                 </div>
@@ -106,6 +107,10 @@ error_reporting(0);
                     <?php 
                         if ($idCategoria > 0) { 
                             $Mproducto = $producto->FiltrarPorCategoria($idCategoria, $ordenPrecio);
+                        } 
+
+                        if ($Buscar != '') { 
+                            $Mproducto = $producto->BuscarPorNombre($Buscar, $ordenPrecio);
                         } 
 
                     while($line = mysql_fetch_array($Mproducto, MYSQL_ASSOC)){

@@ -23,12 +23,11 @@ class Producto{
             return $result;
         }
 
-        public function OrdenarPorPrecio($Orden){            
-            $query = "SELECT * FROM product order by price $Orden ";
-            $result = mysql_query($query) or die('Consulta fallida OrdenarPorPrecio: ' . mysql_error());
+        public function BuscarPorNombre($busqueda, $ordenPrecio){            
+            $query = "SELECT * FROM product WHERE name like '%$busqueda%' $ordenPrecio";
+            $result = mysql_query($query) or die('Consulta fallida BuscarPorNombre: ' . mysql_error());
 
-            return $result;          
+            return $result;
         }
-
 
 }
