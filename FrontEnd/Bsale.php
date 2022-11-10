@@ -1,5 +1,6 @@
 <?php
 header('Content-Type: text/html; charset=UTF-8');
+error_reporting(0);
 
 //conexion a BBDD
     require_once '../BackEnd/Conexion.php';
@@ -35,34 +36,42 @@ header('Content-Type: text/html; charset=UTF-8');
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>        
 
         <div class="container col-md-12">
-            <p class="fw-bold fs-1">Nuestra Tienda <span class="badge bg-warning">OnLine</span></p>
-            
+            <p class="fw-bold fs-1">Nuestra Tienda <span class="badge bg-warning">OnLine</span></p>   
             <div class="row">
                 <div class="col-md-3 mb-3">
+                      <form class="col" action="Bsale.php" method="post">
                     <nav class="navbar navbar-expand-lg bg-light shadow">
                         <div class="col">
-                            <span class="navbar-brand p-3 "> <span class="badge bg-warning mb-3">Categorías</span> </span>
+                            <span class="navbar-brand p-3 "> <span class="badge bg-warning mb-3 fs-5">Categorías</span> </span>
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
-                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <form class="col" action="Bsale.php" method="post">
-                                <div class="list-group">  
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">                                
+                                <div class="col list-group">                          
                                 <?php 
+                                $idCategoria = $_POST['idCategoria'];
                                 while($linea = mysql_fetch_array($VerCategoria, MYSQL_ASSOC)){
-                                        $Id              = $linea['id']; 
+                                        $id              = $linea['id']; 
                                         $nombreCategoria = $linea['name']; 
-                                ?>                          
-                               
-                                <a class="list-group-item list-group-item-action list-group-item-secundary text-uppercase border border-0 border-top">
-                                    <?php echo $nombreCategoria?>                                        
-                                </a>
-  
+                                ?>                                        
+                                <div class="list-group-item list-group-item-secundary text-uppercase border border-0 border-top">
+                                   <input class="form-check-input" type="radio" name="idCategoria" value="<?php echo $id ?>" onchange="submit()" id="flexCheckDefault<?php echo $id ?>" <?php
+
+                                    
+                                    if($idCategoria == $id ){
+                                        echo 'checked';
+                                    }
+                                   ?>>
+                                    <label class="form-check-label" for="flexCheckDefault<?php echo $id ?>">
+                                        <?php echo $nombreCategoria ?>      
+                                    </label>                                
+                               </div>
                                 <?php } ?>
-                                <!--<form class="d-flex" role="search">
-                                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                                    <button class="btn btn-outline-success" type="submit">Buscar</button>
-                                </form>-->
+                                
+                                
+                                <div class="p-4 row">                               
+                                    <button class="btn btn-outline-success" type="submit">Filtrar</button>
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -75,7 +84,7 @@ header('Content-Type: text/html; charset=UTF-8');
                 <?php 
                 $orden = $_POST['Ordenar'];
                 if ($orden != '') { 
-                    $Mproducto = $producto->OrdenarPorPrecio($orden);
+                    echo $ordenPrecio = 'order by price'.$orden;
                 }       
                 ?>
                     <div class="row g-2 mb-3">
@@ -100,6 +109,10 @@ header('Content-Type: text/html; charset=UTF-8');
                     <div class="row row-cols-1 row-cols-md-4 g-4">  
                         
                     <?php 
+                        if ($idCategoria > 0) { 
+                            $Mproducto = $producto->FiltrarPorCategoria($idCategoria);
+                        } 
+
                     while($line = mysql_fetch_array($Mproducto, MYSQL_ASSOC)){
                         $nombreProduct = $line['name']; 
                         $imagen        = $line['url_image'];
@@ -124,7 +137,7 @@ header('Content-Type: text/html; charset=UTF-8');
 
                                 </div>
                             </div>
-                         </div>
+                        </div>
                     <?php } } ?>
                        
                     </div>

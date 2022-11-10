@@ -16,11 +16,9 @@ class Producto{
             return $result;          
         }
 
-        public function MostrarCategoria($idCategoria){            
-            $query = "SELECT * FROM product as p 
-                        inner join category as c 
-                        WHERE p.category = '".$idCategoria."' ";
-            $result = mysql_query($query) or die('Consulta fallida MostrarCategory: ' . mysql_error());
+        public function FiltrarPorCategoria($idCategoria){            
+           $query = "SELECT * FROM product WHERE category = $idCategoria ";
+            $result = mysql_query($query) or die('Consulta fallida FiltrarPorCategoria: ' . mysql_error());
 
             return $result;
         }
