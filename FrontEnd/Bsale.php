@@ -69,7 +69,6 @@ error_reporting(0);
                                     <div class="input-group p-3">
                                         <input type="search" class="form-control" name="Buscar" value="<?php echo $Buscar ?>" placeholder="Buscar" aria-label="Buscar" aria-describedby="button-addon2">
                                         <button class="btn btn-outline-success" type="submit" id="button-addon2">Buscar</button>
-                                            
                                     </div>
                                     <div class="text-center">
                                         <a href="Bsale.php" type="button" class="badge text-bg-success">
@@ -103,8 +102,7 @@ error_reporting(0);
                                 $num++;
                         ?>
                 <!----Fin while contador card--------------------------------->      
-                    <div class="row row-cols-1 row-cols-md-4 g-4">  
-                        
+                    <div class="row row-cols-1 row-cols-md-4 g-4">                          
                     <?php 
                         if ($idCategoria > 0) { 
                             $MostrarProducto = $producto->FiltrarPorCategoria($idCategoria, $ordenPrecio);
@@ -120,38 +118,38 @@ error_reporting(0);
                         $precio        = $line['price'];
                         $descuento     = $line['discount'];
                     ?>                   
-                        <div class="col card-group mb-3" >
+                        <div class="col card-group mb-3">
                             <div class="card shadow">
                                 <?php $num++; ?>      
                                 <img src="<?php echo $imagen; ?>" class="rounded mx-auto d-block" alt="..." width="150" height="150" >
-                                <div class="card-body lh-1">                                                                 
-                                    <p class="lh-1"> <?php echo $nombreProduct; ?></p>
+                                <div class="card-body text-center">                                                                 
+                                    <p class="lh-1"> <?php echo $nombreProduct; ?></p>                                 
+                                </div>
+                                <div class="card-title text-center ">
                                     <?php
                                     if ($descuento == 0) {
-                                        echo '<span class="fw-bold">'. '$ ',$precio.'</span><br>';   
+
+                                        echo '<br><span class="fw-bold">'. '$ ',number_format($precio).'</span><br>';   
                                     }
                                     elseif ($descuento != 0) { 
                                         $DescPeso = $precio/100 * $descuento; ?>                                      
-                                        <span class="text-decoration-line-through">$ <?php echo $precio; ?> </span><br>
-                                        <span class="fw-bold text-danger"> $ <?php echo $precio-$DescPeso; ?> </span> 
+                                        <span class="text-decoration-line-through">$ <?php echo number_format($precio) ?> </span><br>
+                                        <span class="fw-bold text-danger"> $ <?php echo number_format($precio-$DescPeso) ?> </span> 
                                 <?php } ?>
-
                                 </div>
                             </div>
                         </div>
-                    <?php } } ?>
-                       
+                    <?php } } ?>                       
                     </div>
                 </div>
             </div>
         </div>
-        
     </body>
 </html>
 <script>
-    var timer = setTimeout(function(){
+    setTimeout(function(){
         var Total = <?php echo $num ?>-1;
         var loadingText = document.querySelector('#Ncard');
         loadingText.innerText = Total + ' encontrados';
-    }, 10);
+    },10);
 </script>
