@@ -121,7 +121,7 @@ error_reporting(0);
                         <div class="col card-group mb-3">
                             <div class="card shadow">
                                 <?php $num++; ?>      
-                                <img src="<?php echo $imagen; ?>" class="rounded mx-auto d-block" alt="..." width="150" height="150" >
+                                <img src="<?php echo $imagen; ?>" class="rounded mx-auto d-block" alt="Imagen NO Disponible por el Momento" width="150" height="150" >
                                 <div class="card-body text-center">                                                                 
                                     <p class="lh-1"> <?php echo $nombreProduct; ?></p>                                 
                                 </div>
